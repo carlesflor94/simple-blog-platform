@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function articles() {
+export default function ArticlesDetails() {
   return <div></div>;
 }
