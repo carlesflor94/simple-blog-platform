@@ -1,4 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
+import newpostimg from "../img/newpost.svg";
+import settingsimg from "../img/settings.svg";
+import profileimg from "../img/profile.svg";
 
 export default function RootLayout() {
   return (
@@ -13,12 +16,15 @@ export default function RootLayout() {
               Home
             </NavLink>
             <NavLink to="newpost" className="header-nav-item">
+              <img src={newpostimg} alt="new post logo" />
               New Post
             </NavLink>
             <NavLink to="settings" className="header-nav-item">
+              <img src={settingsimg} alt="settings logo" />
               Settings
             </NavLink>
             <NavLink to="signin" className="header-nav-item">
+              <img src={profileimg} alt="sign in logo" />
               Sign In
             </NavLink>
           </nav>

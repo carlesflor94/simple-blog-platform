@@ -54,6 +54,42 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/*root layout*/
+
+.app-header {
+  display: flex;
+  justify-content: center;
+}
+
+.header-wrapper {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 215px;
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  padding-right: 64px;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 200px;
+  max-width: 400px;
+  margin-left: auto;
+}
+
+.header-nav-item {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #333333;
+}
+
 /*newpost*/
 
 .newpost-container form {
