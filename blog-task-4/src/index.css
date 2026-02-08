@@ -54,6 +54,14 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/*newpost*/
+
+.newpost-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
