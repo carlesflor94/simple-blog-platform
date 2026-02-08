@@ -21,13 +21,15 @@ export default function NewPost() {
         />
 
         <div className="newpost-tags">
-          <button className="tags-button">one</button>
-          <button className="tags-button">something</button>
-          <button className="tags-button">chinese</button>
-          <button className="tags-button">english</button>
-          <button className="tags-button">spanish</button>
+          <button>one</button>
+          <button>something</button>
+          <button>chinese</button>
+          <button>english</button>
+          <button>spanish</button>
         </div>
-        <button>Publish Article</button>
+        <div className="publish-wrapper">
+          <button className="newpost-publish">Publish Article</button>
+        </div>
       </form>
     </div>
   );

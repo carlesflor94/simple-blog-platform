@@ -81,6 +81,33 @@ button:focus-visible {
   font-weight: 700;
 }
 
+.newpost-tags {
+  display: flex;
+  gap: 8px;
+}
+
+.newpost-tags button {
+  padding: 6px 16px;
+  color: #aaaaaa;
+  background: white;
+  border: 1px solid #aaaaaa;
+  border-radius: 8px;
+}
+
+.publish-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.newpost-publish {
+  padding: 10px 12px;
+  line-height: 23px;
+  color: white;
+  background-color: #61bb61;
+  border: 1px;
+  border-radius: 8px;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
