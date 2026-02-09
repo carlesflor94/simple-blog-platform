@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const [articles, setArticles] = useState([]);
@@ -20,7 +21,9 @@ export default function Home() {
       <div>
         {articles.map((article) => (
           <article key={article.slug}>
-            <h3>{article.title}</h3>
+            <h3>
+              <Link to={`/article/${article.slug}`}>{article.title}</Link>
+            </h3>
             <p>{article.description}</p>
           </article>
         ))}
