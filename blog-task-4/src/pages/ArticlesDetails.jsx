@@ -23,11 +23,15 @@ export default function ArticlesDetails() {
       <div className="article-content">
         <div className="article-text"></div>
         <div className="article-tags">
-          <button>one</button>
-          <button>something</button>
-          <button>chinese</button>
-          <button>english</button>
-          <button>spanish</button>
+          <button>tag</button>
+          <button>tag</button>
+          <button>tag</button>
+          <button>tag</button>
+          <button>tag</button>
+          <button>tag</button>
+          <button>tag</button>
+          <button>tag</button>
+          <button>tag</button>
         </div>
         <div className="article-author">
           <div className="article-author-img">

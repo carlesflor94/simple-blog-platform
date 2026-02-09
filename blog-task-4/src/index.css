@@ -62,6 +62,34 @@ body {
   color: #333333;
 }
 
+/*article details full page*/
+
+.article-page {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.article-banner {
+  width: 100%;
+  background-color: #333333;
+  display: flex;
+  justify-content: center;
+}
+
+.article-title {
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.article-author-name {
+  color: #5cb85c;
+}
+
+.article-date {
+  color: #aaaaaa;
+}
+
 /*newpost*/
 
 .newpost-container form {
