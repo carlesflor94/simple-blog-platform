@@ -20,7 +20,7 @@ export default function NewPost() {
           placeholder="Input your text"
         />
 
-        <div className="newpost-tags">
+        <div className="general-tags">
           <button>one</button>
           <button>something</button>
           <button>chinese</button>

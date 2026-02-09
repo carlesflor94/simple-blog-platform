@@ -22,7 +22,7 @@ export default function ArticlesDetails() {
       </div>
       <div className="article-content">
         <div className="article-text"></div>
-        <div className="article-tags">
+        <div className="general-tags">
           <button>tag</button>
           <button>tag</button>
           <button>tag</button>

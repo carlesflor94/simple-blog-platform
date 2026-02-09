@@ -26,6 +26,21 @@ body {
   margin: 0;
 }
 
+/*general styles*/
+
+.general-tags {
+  display: flex;
+  gap: 8px;
+}
+
+.general-tags button {
+  padding: 6px 16px;
+  color: #aaaaaa;
+  background: white;
+  border: 1px solid #aaaaaa;
+  border-radius: 8px;
+}
+
 /*root layout*/
 
 .app-header {
@@ -115,19 +130,6 @@ body {
 
 .newpost-user-input-text::placeholder {
   font-weight: 700;
-}
-
-.newpost-tags {
-  display: flex;
-  gap: 8px;
-}
-
-.newpost-tags button {
-  padding: 6px 16px;
-  color: #aaaaaa;
-  background: white;
-  border: 1px solid #aaaaaa;
-  border-radius: 8px;
 }
 
 .publish-wrapper {
