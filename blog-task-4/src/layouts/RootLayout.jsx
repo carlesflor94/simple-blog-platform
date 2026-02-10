@@ -7,7 +7,7 @@ export default function RootLayout() {
   return (
     <div className="root-layout">
       <header className="app-header">
-        <div className="header-wrapper">
+        <div className="header-wrapper general-container">
           <div className="header-title">
             <h1>Realworld Blog</h1>
           </div>

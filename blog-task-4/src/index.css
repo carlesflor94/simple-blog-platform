@@ -1,7 +1,7 @@
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  --font-title: "Titillium Web", sans-serif;
+  --font-text: "Source Sans 3", sans-serif;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -26,7 +26,17 @@ body {
   margin: 0;
 }
 
+h1 {
+  font-family: var(--font-title);
+}
+
 /*general styles*/
+
+.general-container {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+}
 
 .general-tags {
   display: flex;
@@ -39,6 +49,17 @@ body {
   background: white;
   border: 1px solid #aaaaaa;
   border-radius: 8px;
+}
+
+.general-button {
+  padding: 10px 12px;
+  line-height: 23px;
+  color: white;
+  background-color: #61bb61;
+  border: 1px;
+  border-radius: 8px;
+  font-weight: 400;
+  padding: 8px 16px;
 }
 
 /*root layout*/
@@ -90,6 +111,7 @@ body {
   background-color: #333333;
   display: flex;
   justify-content: center;
+  padding: 48px 16px;
 }
 
 .article-title {
@@ -97,12 +119,37 @@ body {
   color: #ffffff;
 }
 
+.article-author {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.article-author-details {
+  display: flex;
+  flex-direction: column;
+}
+
 .article-author-name {
   color: #5cb85c;
+  font-weight: 600;
+  margin: 0;
 }
 
 .article-date {
   color: #aaaaaa;
+  margin: 0;
+}
+
+.article-content {
+  padding: 24px 16px;
+}
+
+.article-content .article-author {
+  justify-content: center;
+  padding: 10px;
+  gap: 10px;
+  margin-top: 24px;
 }
 
 /*newpost*/
@@ -135,15 +182,6 @@ body {
 .publish-wrapper {
   display: flex;
   justify-content: flex-end;
-}
-
-.newpost-publish {
-  padding: 10px 12px;
-  line-height: 23px;
-  color: white;
-  background-color: #61bb61;
-  border: 1px;
-  border-radius: 8px;
 }
 
 @media (prefers-color-scheme: light) {

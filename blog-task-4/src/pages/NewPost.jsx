@@ -28,7 +28,7 @@ export default function NewPost() {
           <button>spanish</button>
         </div>
         <div className="publish-wrapper">
-          <button className="newpost-publish">Publish Article</button>
+          <button className="general-button">Publish Article</button>
         </div>
       </form>
     </div>
