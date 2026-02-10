@@ -12,22 +12,35 @@ export default function Home() {
   }, []);
 
   return (
-    <section>
-      <header>
-        <h1>Realworld Blog</h1>
-        <h2>A place to share your knowledge</h2>
-      </header>
-
-      <div>
-        {articles.map((article) => (
-          <article key={article.slug}>
-            <h3>
-              <Link to={`/article/${article.slug}`}>{article.title}</Link>
-            </h3>
-            <p>{article.description}</p>
-          </article>
-        ))}
+    <div className="home-page">
+      <div className="home-banner general-container">
+        <h1 className="home-title">Realworld Blog</h1>
+        <h2 className="home-subtitle">A place to share your knowledge</h2>
       </div>
-    </section>
+
+      <div className="home-content">
+        <div className="home-tags general-container">
+          <p>Popular tags</p>
+          <div className="general-tags">
+            <button>one</button>
+            <button>something</button>
+            <button>chinese</button>
+            <button>english</button>
+            <button>spanish</button>
+          </div>
+        </div>
+
+        <div>
+          {articles.map((article) => (
+            <article key={article.slug}>
+              <h3>
+                <Link to={`/article/${article.slug}`}>{article.title}</Link>
+              </h3>
+              <p>{article.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
