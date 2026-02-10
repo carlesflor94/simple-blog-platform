@@ -1,52 +1,91 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
+import api from "../services/api";
 import userImg from "../img/user-picture.svg";
 
 export default function ArticlesDetails() {
+  const { slug } = useParams();
+  const [article, setArticle] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    api
+      .get(`/articles/${slug}`)
+      .then((data) => {
+        setArticle(data.article);
+      })
+      .catch(() => {
+        setError("Failed to load article");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <div className="general-container">
+        <p>Loading article...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="general-container">
+        <p>{error}</p>
+      </div>
+    );
+  }
+
+  if (!article) {
+    return null;
+  }
+
   return (
     <div className="article-page">
       <div className="article-banner">
         <div className="article-banner-content general-container">
-          <h1 className="article-title">
-            If we quantify the alarm, we can get to the FTP pixel through the
-            online SSL interface!
-          </h1>
+          <h1 className="article-title">{article.title}</h1>
           <div className="article-author">
             <div className="article-author-img">
-              <img src={userImg} alt="user profile picture" />
+              <img
+                src={article.author.image || userImg}
+                alt="user profile picture"
+              />
             </div>
             <div className="article-author-details">
-              <p className="article-author-name">John Lobster</p>
-              <p className="article-date">01 January 2023</p>
+              <p className="article-author-name">{article.author.username}</p>
+              <p className="article-date">
+                {new Date(article.createdAt).toLocaleDateString()}
+              </p>
             </div>
           </div>
         </div>
       </div>
       <div className="article-content general-container">
         <div className="article-text">
-          <p>
-            Omnis perspiciatis qui quia commodi sequi modi. Nostrum quam aut
-            cupiditate est facere omnis possimus. Tenetur similique nemo illo
-            soluta molestias facere quo. Ipsam totam facilis delectus nihil
-            quidem soluta vel est omnis.
-          </p>
+          <ReactMarkdown>{article.body}</ReactMarkdown>
         </div>
         <div className="general-tags">
-          <button>tag</button>
-          <button>tag</button>
-          <button>tag</button>
-          <button>tag</button>
-          <button>tag</button>
-          <button>tag</button>
-          <button>tag</button>
-          <button>tag</button>
-          <button>tag</button>
+          {article.tagList.map((tag) => (
+            <button key={tag}>{tag}</button>
+          ))}
         </div>
         <div className="article-author">
           <div className="article-author-img">
-            <img src={userImg} alt="user profile picture" />
+            <img
+              src={article.author.image || userImg}
+              alt="user profile picture"
+            />
           </div>
           <div className="article-author-details">
-            <p className="article-author-name">John Lobster</p>
-            <p className="article-date">01 January 2023</p>
+            <p className="article-author-name">{article.author.username}</p>
+            <p className="article-date">
+              {new Date(article.createdAt).toLocaleDateString()}
+            </p>
           </div>
           <button className="general-button">Favorite article</button>
         </div>

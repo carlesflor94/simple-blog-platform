@@ -138,6 +138,10 @@ h1 {
   padding: 16px;
 }
 
+.home-articles {
+  border: solid 1px grey;
+}
+
 /*article details full page*/
 
 .article-page {

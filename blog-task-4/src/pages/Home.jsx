@@ -30,11 +30,11 @@ export default function Home() {
           </div>
         </div>
 
-        <div>
+        <div className="home-articles general-container">
           {articles.map((article) => (
             <article key={article.slug}>
               <h3>
-                <Link to={`/article/${article.slug}`}>{article.title}</Link>
+                <Link to={`/articles/${article.slug}`}>{article.title}</Link>
               </h3>
               <p>{article.description}</p>
             </article>
