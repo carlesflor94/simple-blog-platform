@@ -32,10 +32,12 @@ export default function Home() {
 
         <div className="home-articles general-container">
           {articles.map((article) => (
-            <article key={article.slug}>
-              <h3>
-                <Link to={`/articles/${article.slug}`}>{article.title}</Link>
-              </h3>
+            <article key={article.slug} className="home-article-container">
+              <h2 className="home-article-title">
+                <Link to={`/articles/${article.slug}`} className="article-link">
+                  {article.title}
+                </Link>
+              </h2>
               <p>{article.description}</p>
             </article>
           ))}

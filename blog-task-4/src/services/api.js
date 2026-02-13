@@ -1,4 +1,4 @@
-const BASE_URL = "https://conduit.productionready.io/api";
+const BASE_URL = "https://realworld.habsida.net/api";
 
 async function request(endpoint, options = {}) {
   const response = await fetch(`${BASE_URL}${endpoint}`, {
