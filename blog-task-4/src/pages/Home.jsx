@@ -3,6 +3,16 @@ import api from "../services/api";
 import { Link } from "react-router-dom";
 import userImg from "../img/user-picture.svg";
 
+const dateFormat = (dateString) => {
+  const date = new Date(dateString);
+
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = date.toLocaleString("en-GB", { month: "long" });
+  const year = date.getFullYear();
+
+  return `${day} ${month} ${year}`;
+};
+
 export default function Home() {
   const [articles, setArticles] = useState([]);
 
@@ -47,12 +57,15 @@ export default function Home() {
                       {article.author.username}
                     </p>
                     <p className="article-date">
-                      {new Date(article.createdAt).toLocaleDateString()}
+                      {dateFormat(article.createdAt)}
                     </p>
                   </div>
                 </div>
-                <div className="preview-likes-counter">
-                  {article.favoritesCount}
+                <div className="preview-likes-container">
+                  <div className="preview-likes-heart">♥</div>
+                  <div className="preview-likes-counter">
+                    {article.favoritesCount}
+                  </div>
                 </div>
               </div>
               <h2 className="home-article-title">

@@ -136,20 +136,32 @@ h1 {
 .home-tags {
   border: solid 1px grey;
   padding: 16px;
+  margin-bottom: 16px;
 }
 
 .home-articles {
   border: solid 1px grey;
+  padding: 16px;
 }
 
 .home-preview-header {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.preview-likes-counter {
+.preview-likes-container {
   padding: 8px 16px;
   border: 1px solid #61bb61;
-  border-radius: 1px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.preview-likes-counter,
+.preview-likes-heart {
+  color: #61bb61;
 }
 
 /*article details full page*/
@@ -188,6 +200,11 @@ h1 {
   color: #5cb85c;
   font-weight: 600;
   margin: 0;
+}
+
+.article-author-img img {
+  width: 24px;
+  height: 24px;
 }
 
 .article-date {
