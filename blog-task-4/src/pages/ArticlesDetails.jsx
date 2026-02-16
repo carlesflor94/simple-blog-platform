@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import api from "../services/api";
 import userImg from "../img/user-picture.svg";
@@ -67,7 +67,14 @@ export default function ArticlesDetails() {
               />
             </div>
             <div className="article-author-details">
-              <p className="article-author-name">{article.author.username}</p>
+              <p className="article-author-name">
+                <Link
+                  to={`/profile/${article.author.username}`}
+                  className="article-author-link"
+                >
+                  {article.author.username}
+                </Link>
+              </p>
               <p className="article-date">{dateFormat(article.createdAt)}</p>
             </div>
           </div>

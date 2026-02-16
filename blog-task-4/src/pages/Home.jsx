@@ -77,7 +77,10 @@ export default function Home() {
                   </div>
                   <div className="article-author-details">
                     <p className="article-author-name">
-                      <Link to={`/profile/${article.author.username}`}>
+                      <Link
+                        to={`/profile/${article.author.username}`}
+                        className="article-author-link"
+                      >
                         {article.author.username}
                       </Link>
                     </p>
