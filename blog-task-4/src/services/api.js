@@ -1,9 +1,11 @@
 const BASE_URL = "https://realworld.habsida.net/api";
 
 async function request(endpoint, options = {}) {
+  const token = localStorage.getItem("token");
   const response = await fetch(`${BASE_URL}${endpoint}`, {
     headers: {
       "Content-Type": "application/json",
+      ...(token && { Authorization: `Token ${token}` }),
       ...options.headers,
     },
     ...options,
