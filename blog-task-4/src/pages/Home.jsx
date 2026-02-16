@@ -15,12 +15,23 @@ const dateFormat = (dateString) => {
 
 export default function Home() {
   const [articles, setArticles] = useState([]);
+  const [page, setPage] = useState(1);
+  const [articlesCount, setArticlesCount] = useState(0);
+
+  const articlesLimit = 3;
 
   useEffect(() => {
-    api.get("/articles").then((data) => {
-      setArticles(data.articles);
-    });
-  }, []);
+    const offset = (page - 1) * articlesLimit;
+
+    api
+      .get(`/articles?limit=${articlesLimit}&offset=${offset}`)
+      .then((data) => {
+        setArticles(data.articles);
+        setArticlesCount(data.articlesCount);
+      });
+  }, [page]);
+
+  const totalPages = Math.ceil(articlesCount / articlesLimit);
 
   return (
     <div className="home-page">
@@ -83,6 +94,20 @@ export default function Home() {
                 ))}
               </div>
             </article>
+          ))}
+        </div>
+
+        <div className="home-pagination-container general-container">
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index}
+              className={
+                page === index + 1 ? "page-button active" : "page-button"
+              }
+              onClick={() => setPage(index + 1)}
+            >
+              {index + 1}
+            </button>
           ))}
         </div>
       </div>
