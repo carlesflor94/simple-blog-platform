@@ -77,7 +77,9 @@ export default function Home() {
                   </div>
                   <div className="article-author-details">
                     <p className="article-author-name">
-                      {article.author.username}
+                      <Link to={`/profile/${article.author.username}`}>
+                        {article.author.username}
+                      </Link>
                     </p>
                     <p className="article-date">
                       {dateFormat(article.createdAt)}
