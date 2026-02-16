@@ -199,6 +199,12 @@ h1 {
   color: white;
 }
 
+.page-button:hover {
+  background-color: #b7e4b7;
+  color: white;
+  cursor: pointer;
+}
+
 /*article details full page*/
 
 .article-page {
