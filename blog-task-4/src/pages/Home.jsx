@@ -41,9 +41,12 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="home-articles general-container">
+        <div className="home-articles">
           {articles.map((article) => (
-            <article key={article.slug} className="home-article-container">
+            <article
+              key={article.slug}
+              className="home-article-container general-container"
+            >
               <div className="home-preview-header">
                 <div className="article-author">
                   <div className="article-author-img">
@@ -73,7 +76,7 @@ export default function Home() {
                   {article.title}
                 </Link>
               </h2>
-              <p className="article-text">{article.description}</p>
+              <p className="home-article-text">{article.description}</p>
               <div className="general-tags">
                 {article.tagList.map((tag) => (
                   <button key={tag}>{tag}</button>
