@@ -80,12 +80,6 @@ export default function SignUp() {
     <div className="signup-container general-container">
       <h1 className="signup-title">Sign Up</h1>
       <form onSubmit={handleSubmit} className="signup-form general-form">
-        {errors &&
-          Object.entries(errors).map(([key, value]) => (
-            <p key={key}>
-              {key} {value.join(", ")}
-            </p>
-          ))}
         <input
           type="text"
           className="general-user-input"
@@ -95,6 +89,9 @@ export default function SignUp() {
           onChange={handleChange}
           required
         />
+        {errors?.username && (
+          <p className="signup-error">{errors.username.join(", ")}</p>
+        )}
         <input
           type="text"
           className="general-user-input"
@@ -104,6 +101,9 @@ export default function SignUp() {
           onChange={handleChange}
           required
         />
+        {errors?.email && (
+          <p className="signup-error">{errors.email.join(", ")}</p>
+        )}
         <input
           type="password"
           className="general-user-input"
@@ -113,27 +113,38 @@ export default function SignUp() {
           onChange={handleChange}
           required
         />
+        {errors?.password && (
+          <p className="signup-error">{errors.password.join(", ")}</p>
+        )}
         <input
           type="password"
           className="general-user-input"
           placeholder="Repeat Password"
           name="repeatPassword"
-          value={formSignUp.password}
+          value={formSignUp.repeatPassword}
           onChange={handleChange}
           required
         />
+        {errors?.repeatPassword && (
+          <p className="signup-error">{errors.repeatPassword.join(", ")}</p>
+        )}
 
         <div className="signup-bottom-container">
-          <label className="signup-checkbox">
-            <input
-              type="checkbox"
-              name="agree"
-              className="signup-checkbox-input"
-              checked={formSignUp.agree}
-              onChange={handleChange}
-            />
-            I give consent to use my personal data
-          </label>
+          <div className="signup-checkbox-wrapper">
+            <label className="signup-checkbox">
+              <input
+                type="checkbox"
+                name="agree"
+                className="signup-checkbox-input"
+                checked={formSignUp.agree}
+                onChange={handleChange}
+              />
+              I give consent to use my personal data
+            </label>
+            {errors?.agree && (
+              <p className="signup-error">{errors.agree.join(", ")}</p>
+            )}
+          </div>
           <button className="general-button">Sign Up</button>
         </div>
       </form>
