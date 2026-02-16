@@ -15,6 +15,15 @@ export default function Settings() {
     avatar: user?.image || "",
   });
 
+  const urlValid = (string) => {
+    try {
+      new URL(string);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -42,16 +51,24 @@ export default function Settings() {
     }
 
     if (
-      formUpdateUser.password.length < 6 ||
-      formUpdateUser.password.length > 40
+      formUpdateUser.password &&
+      (formUpdateUser.password.length < 6 ||
+        formUpdateUser.password.length > 40)
     ) {
       updateErrors.password = [
-        "Password must be between 6 and 20 characters long",
+        "Password must be between 6 and 40 characters long",
       ];
     }
 
-    if (formUpdateUser.password !== formUpdateUser.repeatPassword) {
+    if (
+      formUpdateUser.password &&
+      formUpdateUser.password !== formUpdateUser.repeatPassword
+    ) {
       updateErrors.repeatPassword = ["Passwords do not match"];
+    }
+
+    if (formUpdateUser.avatar && !urlValid(formUpdateUser.avatar)) {
+      updateErrors.avatar = ["Avatar is not a valid URL"];
     }
 
     if (Object.keys(updateErrors).length > 0) {
@@ -62,12 +79,12 @@ export default function Settings() {
     setErrors({});
 
     try {
-      const data = await api.post("/users", {
+      const data = await api.put("/user", {
         user: {
           username: formUpdateUser.username,
           email: formUpdateUser.email,
-          password: formUpdateUser.password,
-          avatar: formUpdateUser.avatar,
+          password: formUpdateUser.password || undefined,
+          image: formUpdateUser.avatar || undefined,
         },
       });
 
@@ -113,7 +130,6 @@ export default function Settings() {
           name="password"
           value={formUpdateUser.password}
           onChange={handleChange}
-          required
         />
         {errors?.password && (
           <p className="signup-error">{errors.password.join(", ")}</p>
@@ -125,7 +141,6 @@ export default function Settings() {
           name="repeatPassword"
           value={formUpdateUser.repeatPassword}
           onChange={handleChange}
-          required
         />
         {errors?.repeatPassword && (
           <p className="signup-error">{errors.repeatPassword.join(", ")}</p>
@@ -137,15 +152,13 @@ export default function Settings() {
           name="avatar"
           value={formUpdateUser.avatar}
           onChange={handleChange}
-          required
         />
+        {errors?.avatar && (
+          <p className="signup-error">{errors.avatar.join(", ")}</p>
+        )}
 
         <div className="signup-bottom-container">
-          <div className="signup-checkbox-wrapper">
-            {errors?.agree && (
-              <p className="signup-error">{errors.agree.join(", ")}</p>
-            )}
-          </div>
+          <div className="signup-checkbox-wrapper"></div>
           <button className="general-button">Update Settings</button>
         </div>
       </form>
