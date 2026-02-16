@@ -113,6 +113,18 @@ h1 {
   color: #333333;
 }
 
+.header-nav-item:hover {
+  color: #61bb61;
+}
+
+.header-logout-button {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
 /*home page*/
 
 .home-banner {

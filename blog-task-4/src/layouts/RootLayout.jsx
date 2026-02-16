@@ -38,7 +38,7 @@ export default function RootLayout() {
                 </NavLink>
                 <button
                   onClick={logout}
-                  className="header-nav-item header-logout"
+                  className="header-nav-item header-logout-button"
                 >
                   Log Out
                 </button>
