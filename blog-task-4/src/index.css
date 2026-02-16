@@ -44,13 +44,18 @@ h1 {
 
 .general-button {
   padding: 10px 12px;
-  line-height: 23px;
+  min-width: 120px;
   color: white;
   background-color: #61bb61;
   border: 1px;
   border-radius: 8px;
   font-weight: 400;
-  padding: 8px 16px;
+}
+
+.general-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .general-user-input {
@@ -271,13 +276,37 @@ h1 {
   margin-top: 24px;
 }
 
-/*newpost*/
+/*sign in*/
 
-.newpost-container form {
+.signin-container {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-  gap: 16px;
 }
+
+.signin-title {
+  font-weight: 700;
+  font-size: 46px;
+}
+
+.signin-bottom-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.signup-link {
+  color: #61bb61;
+  text-decoration: none;
+}
+
+.signup-link:hover {
+  text-decoration: underline;
+}
+
+/*newpost*/
 
 .newpost-user-input-text {
   width: 480px;
@@ -300,11 +329,5 @@ h1 {
   :root {
     color: #213547;
     background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
   }
 }

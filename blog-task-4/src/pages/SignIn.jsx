@@ -15,7 +15,7 @@ export default function SignIn() {
   return (
     <div className="signin-container general-container">
       <h1 className="signin-title">Sign In</h1>
-      <form onSubmit={handleSubmit} className="signin-form">
+      <form onSubmit={handleSubmit} className="signin-form general-form">
         <input
           type="text"
           className="general-user-input"
@@ -33,7 +33,7 @@ export default function SignIn() {
 
         <div className="signin-bottom-container general-container">
           <p className="signin-text">
-            Not a user?
+            Not a user?{" "}
             <Link to="/signup" className="signup-link">
               Click here to sign up!
             </Link>
