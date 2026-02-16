@@ -4,6 +4,16 @@ import ReactMarkdown from "react-markdown";
 import api from "../services/api";
 import userImg from "../img/user-picture.svg";
 
+const dateFormat = (dateString) => {
+  const date = new Date(dateString);
+
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = date.toLocaleString("en-GB", { month: "long" });
+  const year = date.getFullYear();
+
+  return `${day} ${month} ${year}`;
+};
+
 export default function ArticlesDetails() {
   const { slug } = useParams();
   const [article, setArticle] = useState(null);
@@ -58,9 +68,7 @@ export default function ArticlesDetails() {
             </div>
             <div className="article-author-details">
               <p className="article-author-name">{article.author.username}</p>
-              <p className="article-date">
-                {new Date(article.createdAt).toLocaleDateString()}
-              </p>
+              <p className="article-date">{dateFormat(article.createdAt)}</p>
             </div>
           </div>
         </div>
@@ -83,9 +91,7 @@ export default function ArticlesDetails() {
           </div>
           <div className="article-author-details">
             <p className="article-author-name">{article.author.username}</p>
-            <p className="article-date">
-              {new Date(article.createdAt).toLocaleDateString()}
-            </p>
+            <p className="article-date">{dateFormat(article.createdAt)}</p>
           </div>
           <button className="general-button">Favorite article</button>
         </div>
