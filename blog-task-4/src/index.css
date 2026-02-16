@@ -353,6 +353,31 @@ h1 {
   margin: 0;
 }
 
+/*profile*/
+
+.profile-banner {
+  width: 100%;
+  background-color: #333333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 48px 16px;
+}
+
+.profile-picture {
+  height: 132px;
+  width: 132px;
+  border-radius: 64px;
+}
+
+.profile-title {
+  color: white;
+  font-weight: 600;
+  font-size: 32px;
+  margin: 10px 15px;
+}
+
 /*newpost*/
 
 .newpost-user-input-text {
