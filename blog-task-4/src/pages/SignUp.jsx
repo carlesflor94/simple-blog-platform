@@ -27,16 +27,38 @@ export default function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let signUpErrors = {};
+
+    if (formSignUp.username.length < 3 || formSignUp.username.length > 20) {
+      signUpErrors.username = [
+        "Username must be between 3 and 20 characters long",
+      ];
+    }
+
+    if (!formSignUp.email.includes("@")) {
+      signUpErrors.email = ["Invalid email"];
+    }
+
+    if (formSignUp.password.length < 6 || formSignUp.password.length > 40) {
+      signUpErrors.password = [
+        "Password must be between 6 and 20 characters long",
+      ];
+    }
 
     if (!formSignUp.agree) {
-      setErrors({ agree: ["You must agree to give your personal data."] });
-      return;
+      signUpErrors.agree = ["You must agree to use your personal data"];
     }
 
     if (formSignUp.password !== formSignUp.repeatPassword) {
-      setErrors({ password: ["Passwords do not match."] });
+      signUpErrors.repeatPassword = ["Passwords do not match"];
+    }
+
+    if (Object.keys(signUpErrors).length > 0) {
+      setErrors(signUpErrors);
       return;
     }
+
+    setErrors({});
 
     try {
       const data = await api.post("/users", {
