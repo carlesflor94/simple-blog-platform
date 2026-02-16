@@ -53,6 +53,13 @@ h1 {
   padding: 8px 16px;
 }
 
+.general-user-input {
+  width: 480px;
+  padding: 12px 24px;
+  border: 1px solid #aaaaaa;
+  border-radius: 8px;
+}
+
 /*root layout*/
 
 .app-header {
@@ -270,13 +277,6 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: 16px;
-}
-
-.newpost-user-input {
-  width: 480px;
-  padding: 12px 24px;
-  border: 1px solid #aaaaaa;
-  border-radius: 8px;
 }
 
 .newpost-user-input-text {

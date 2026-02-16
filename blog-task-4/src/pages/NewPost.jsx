@@ -6,12 +6,12 @@ export default function NewPost() {
       <form>
         <textarea
           type="text"
-          className="newpost-user-input"
+          className="general-user-input"
           placeholder="Title"
         />
         <textarea
           type="text"
-          className="newpost-user-input"
+          className="general-user-input"
           placeholder="Short description"
         />
         <textarea
