@@ -415,6 +415,14 @@ h1 {
 
 /*newpost*/
 
+.newpost-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin-top: 24px;
+}
+
 .newpost-user-input-text {
   width: 480px;
   min-height: 100px;
@@ -427,7 +435,7 @@ h1 {
   font-weight: 700;
 }
 
-.publish-wrapper {
+.newpost-publish-container {
   display: flex;
   justify-content: flex-end;
 }

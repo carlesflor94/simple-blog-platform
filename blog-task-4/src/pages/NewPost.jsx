@@ -2,19 +2,15 @@ import React from "react";
 
 export default function NewPost() {
   return (
-    <div className="newpost-container">
-      <form>
-        <textarea
-          type="text"
-          className="general-user-input"
-          placeholder="Title"
-        />
-        <textarea
+    <div className="newpost-container general-container">
+      <form className="newpost-form general-form">
+        <input type="text" className="general-user-input" placeholder="Title" />
+        <input
           type="text"
           className="general-user-input"
           placeholder="Short description"
         />
-        <textarea
+        <input
           type="text"
           className="newpost-user-input-text"
           placeholder="Input your text"
@@ -27,7 +23,7 @@ export default function NewPost() {
           <button>english</button>
           <button>spanish</button>
         </div>
-        <div className="publish-wrapper">
+        <div className="newpost-publish-container">
           <button className="general-button">Publish Article</button>
         </div>
       </form>
