@@ -33,6 +33,15 @@ export default function Home() {
 
   const totalPages = Math.ceil(articlesCount / articlesLimit);
 
+  const visiblePages = 7;
+  let startPage = Math.max(1, page - Math.floor(visiblePages / 2));
+  let endPage = startPage + visiblePages - 1;
+
+  if (endPage > totalPages) {
+    endPage = totalPages;
+    startPage = Math.max(1, endPage - visiblePages + 1);
+  }
+
   return (
     <div className="home-page">
       <div className="home-banner general-container">
@@ -98,17 +107,20 @@ export default function Home() {
         </div>
 
         <div className="home-pagination-container general-container">
-          {Array.from({ length: totalPages }, (_, index) => (
-            <button
-              key={index}
-              className={
-                page === index + 1 ? "page-button active" : "page-button"
-              }
-              onClick={() => setPage(index + 1)}
-            >
-              {index + 1}
-            </button>
-          ))}
+          {Array.from({ length: endPage - startPage + 1 }, (_, index) => {
+            const pageNumber = startPage + index;
+            return (
+              <button
+                key={pageNumber}
+                className={
+                  page === pageNumber ? "page-button active" : "page-button"
+                }
+                onClick={() => setPage(pageNumber)}
+              >
+                {pageNumber}
+              </button>
+            );
+          })}
         </div>
       </div>
     </div>
