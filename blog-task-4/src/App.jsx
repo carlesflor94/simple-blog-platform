@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import NewPost from "./pages/NewPost";
 import Settings from "./pages/Settings";
 import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 import ArticlesDetails from "./pages/ArticlesDetails";
 
 //layouts
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
       <Route path="newpost" element={<NewPost />} />
       <Route path="settings" element={<Settings />} />
       <Route path="signin" element={<SignIn />} />
+      <Route path="signup" element={<SignUp />} />
     </Route>,
   ),
 );
