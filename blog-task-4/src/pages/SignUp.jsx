@@ -28,7 +28,7 @@ export default function SignUp() {
           required
         />
 
-        <div className="signin-bottom-container general-container">
+        <div className="signup-bottom-container">
           <button className="general-button">Sign Up</button>
         </div>
       </form>
