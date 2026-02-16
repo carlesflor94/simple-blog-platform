@@ -29,6 +29,13 @@ export default function RootLayout() {
                   <img src={settingsimg} alt="settings logo" />
                   Settings
                 </NavLink>
+                <NavLink
+                  to={`profile/${user.username}`}
+                  className="header-nav-item"
+                >
+                  <img src={profileimg} alt="profile logo" />
+                  {user.username}
+                </NavLink>
                 <button
                   onClick={logout}
                   className="header-nav-item header-logout"

@@ -45,6 +45,7 @@ export default function SignIn() {
           type="text"
           className="general-user-input"
           placeholder="Username"
+          name="username"
           value={formSignIn.username}
           onChange={handleChange}
           required
@@ -53,6 +54,7 @@ export default function SignIn() {
           type="password"
           className="general-user-input"
           placeholder="Password"
+          name="password"
           value={formSignIn.password}
           onChange={handleChange}
           required

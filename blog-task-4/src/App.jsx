@@ -11,6 +11,7 @@ import NewPost from "./pages/NewPost";
 import Settings from "./pages/Settings";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import Profile from "./pages/Profile";
 import ArticlesDetails from "./pages/ArticlesDetails";
 
 //layouts
@@ -25,6 +26,7 @@ const router = createBrowserRouter(
       <Route path="settings" element={<Settings />} />
       <Route path="signin" element={<SignIn />} />
       <Route path="signup" element={<SignUp />} />
+      <Route path="profile/:username" element={<Profile />} />
     </Route>,
   ),
 );

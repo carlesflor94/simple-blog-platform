@@ -52,6 +52,11 @@ h1 {
   font-weight: 400;
 }
 
+.general-button:hover {
+  background-color: #b7e4b7;
+  cursor: pointer;
+}
+
 .general-form {
   display: flex;
   flex-direction: column;
@@ -328,7 +333,7 @@ h1 {
 
 .signup-bottom-container {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 
 /*newpost*/
