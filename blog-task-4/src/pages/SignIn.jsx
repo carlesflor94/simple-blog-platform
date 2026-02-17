@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
+import { useAuth } from "../context/AuthContext";
 
 export default function SignIn() {
   const [formSignIn, setformSignIn] = useState({
@@ -11,6 +12,7 @@ export default function SignIn() {
 
   const [errors, setErrors] = useState(null);
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleChange = (e) => {
     setformSignIn({ ...formSignIn, [e.target.name]: e.target.value });
@@ -20,11 +22,11 @@ export default function SignIn() {
     e.preventDefault();
 
     try {
-      const res = await api.post("/users/login", {
-        user: form,
+      const data = await api.post("/users/login", {
+        user: formSignIn,
       });
 
-      login(res.data.user);
+      login(data.user);
       navigate("/");
     } catch (err) {
       setErrors(err.response?.data?.errors);

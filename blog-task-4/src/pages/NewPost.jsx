@@ -103,7 +103,9 @@ export default function NewPost() {
           ))}
         </div>
         <div className="newpost-publish-container">
-          <button className="general-button">Publish Article</button>
+          <button type="submit" className="general-button">
+            Publish Article
+          </button>
         </div>
       </form>
     </div>
