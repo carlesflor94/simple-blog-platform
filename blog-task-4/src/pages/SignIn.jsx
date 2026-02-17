@@ -6,7 +6,7 @@ import { useAuth } from "../context/AuthContext";
 
 export default function SignIn() {
   const [formSignIn, setformSignIn] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -46,9 +46,9 @@ export default function SignIn() {
         <input
           type="text"
           className="general-user-input"
-          placeholder="Username"
-          name="username"
-          value={formSignIn.username}
+          placeholder="Email"
+          name="email"
+          value={formSignIn.email}
           onChange={handleChange}
           required
         />

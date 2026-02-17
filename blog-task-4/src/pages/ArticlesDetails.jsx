@@ -97,7 +97,14 @@ export default function ArticlesDetails() {
             />
           </div>
           <div className="article-author-details">
-            <p className="article-author-name">{article.author.username}</p>
+            <p className="article-author-name">
+              <Link
+                to={`/profile/${article.author.username}`}
+                className="article-author-link"
+              >
+                {article.author.username}
+              </Link>
+            </p>
             <p className="article-date">{dateFormat(article.createdAt)}</p>
           </div>
           <button className="general-button">Favorite article</button>
