@@ -29,7 +29,11 @@ export default function SignIn() {
       login(data.user);
       navigate("/");
     } catch (err) {
-      setErrors(err.response?.data?.errors);
+      if (err.response?.data?.errors) {
+        setErrors(err.response.data.errors);
+      } else {
+        setErrors({ general: ["Login failed. Please try again."] });
+      }
     }
   };
 

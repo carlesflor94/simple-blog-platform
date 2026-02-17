@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import api from "../services/api";
 import userImg from "../img/user-picture.svg";
+import { useAuth } from "../context/AuthContext";
 
 const dateFormat = (dateString) => {
   const date = new Date(dateString);
@@ -19,6 +20,10 @@ export default function ArticlesDetails() {
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { user } = useAuth();
+
+  const isArticleAuthor =
+    user && article && user.username === article.author.username;
 
   useEffect(() => {
     api
@@ -108,6 +113,11 @@ export default function ArticlesDetails() {
             <p className="article-date">{dateFormat(article.createdAt)}</p>
           </div>
           <button className="general-button">Favorite article</button>
+          {isArticleAuthor && (
+            <Link to={`/editor/${article.slug}`} className="general-button">
+              Edit Article
+            </Link>
+          )}
         </div>
       </div>
     </div>

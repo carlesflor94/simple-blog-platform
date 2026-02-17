@@ -1,6 +1,7 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import api from "../services/api";
+import { useAuth } from "../context/AuthContext";
 
 export default function NewPost() {
   const navigate = useNavigate();
@@ -11,6 +12,10 @@ export default function NewPost() {
     body: "",
     tagList: [],
   });
+  const { user } = useAuth();
+
+  const { slug } = useParams();
+  const isEditing = !!slug;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,17 +30,23 @@ export default function NewPost() {
     e.preventDefault();
 
     try {
-      const data = await api.post("/articles", {
-        article: {
-          title: formCreateArticle.title,
-          description: formCreateArticle.description,
-          body: formCreateArticle.body,
-          tagList: formCreateArticle.tagList,
-        },
-      });
+      let data;
+      if (isEditing) {
+        data = await api.put(`/articles/${slug}`, {
+          article: formCreateArticle,
+        });
+      } else {
+        data = await api.post("/articles", {
+          article: formCreateArticle,
+        });
+      }
       navigate(`/articles/${data.article.slug}`);
     } catch (err) {
-      setErrors(err.errors);
+      setErrors(
+        err.response?.data?.errors || {
+          general: ["Something went wrong."],
+        },
+      );
     }
   };
 
@@ -54,6 +65,21 @@ export default function NewPost() {
       }
     });
   };
+
+  /*editing view*/
+
+  useEffect(() => {
+    if (isEditing) {
+      api.get(`/articles/${slug}`).then((data) => {
+        setFormCreateArticle({
+          title: data.article.title,
+          description: data.article.description,
+          body: data.article.body,
+          tagList: data.article.tagList,
+        });
+      });
+    }
+  }, [slug, isEditing, user, navigate]);
 
   return (
     <div className="newpost-container general-container">
