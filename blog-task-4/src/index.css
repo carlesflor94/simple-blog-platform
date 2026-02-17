@@ -429,6 +429,8 @@ h1 {
   padding: 12px 24px;
   border: 1px solid #aaaaaa;
   border-radius: 8px;
+  resize: vertical;
+  font-family: var(--font-text);
 }
 
 .newpost-user-input-text::placeholder {
@@ -438,6 +440,25 @@ h1 {
 .newpost-publish-container {
   display: flex;
   justify-content: flex-end;
+}
+
+.general-tags button.newpost-tag-selected {
+  color: #61bb61;
+  border-color: #61bb61;
+}
+
+.general-tags button.newpost-tag-selected:hover {
+  color: #aaaaaa;
+  border-color: #aaaaaa;
+  background-color: #b7e4b7;
+  cursor: pointer;
+}
+
+.general-tags button.newpost-tag-unselected:hover {
+  background-color: #61bb61;
+  border-color: #61bb61;
+  cursor: pointer;
+  color: black;
 }
 
 @media (prefers-color-scheme: light) {

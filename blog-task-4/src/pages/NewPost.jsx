@@ -33,10 +33,26 @@ export default function NewPost() {
           tagList: formCreateArticle.tagList,
         },
       });
-      navigate(`/article/${data.article.slug}`);
+      navigate(`/articles/${data.article.slug}`);
     } catch (err) {
       setErrors(err.errors);
     }
+  };
+
+  const handleTagClick = (tag) => {
+    setFormCreateArticle((prev) => {
+      if (prev.tagList.includes(tag)) {
+        return {
+          ...prev,
+          tagList: prev.tagList.filter((t) => t !== tag),
+        };
+      } else {
+        return {
+          ...prev,
+          tagList: [...prev.tagList, tag],
+        };
+      }
+    });
   };
 
   return (
@@ -60,7 +76,7 @@ export default function NewPost() {
           value={formCreateArticle.description}
           onChange={handleChange}
         />
-        <input
+        <textarea
           type="text"
           className="newpost-user-input-text"
           placeholder="Input your text"
@@ -71,11 +87,20 @@ export default function NewPost() {
         />
 
         <div className="general-tags">
-          <button>one</button>
-          <button>something</button>
-          <button>chinese</button>
-          <button>english</button>
-          <button>spanish</button>
+          {["one", "something", "chinese", "english", "spanish"].map((tag) => (
+            <button
+              type="button"
+              key={tag}
+              onClick={() => handleTagClick(tag)}
+              className={
+                formCreateArticle.tagList.includes(tag)
+                  ? "newpost-tag-selected"
+                  : "newpost-tag-unselected"
+              }
+            >
+              {tag}
+            </button>
+          ))}
         </div>
         <div className="newpost-publish-container">
           <button className="general-button">Publish Article</button>
