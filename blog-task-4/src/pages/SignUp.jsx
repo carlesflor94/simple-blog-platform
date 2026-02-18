@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
+import Button from "../components/Button";
 
 export default function SignUp() {
   const [formSignUp, setFormSignUp] = useState({
@@ -145,7 +146,7 @@ export default function SignUp() {
               <p className="signup-error">{errors.agree.join(", ")}</p>
             )}
           </div>
-          <button className="general-button">Sign Up</button>
+          <Button type="submit">Sign Up</Button>
         </div>
       </form>
     </div>

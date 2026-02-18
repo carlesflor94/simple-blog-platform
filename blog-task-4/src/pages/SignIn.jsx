@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
+import Button from "../components/Button";
 
 export default function SignIn() {
   const [formSignIn, setformSignIn] = useState({
@@ -73,7 +74,7 @@ export default function SignIn() {
               Click here to sign up!
             </Link>
           </p>
-          <button className="general-button">Sign In</button>
+          <Button type="submit">Sign In</Button>
         </div>
       </form>
     </div>
