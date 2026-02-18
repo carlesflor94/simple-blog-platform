@@ -5,14 +5,7 @@ import api from "../services/api";
 import { useParams, Link } from "react-router-dom";
 import userImg from "../img/user-picture.svg";
 import Button from "../components/Button";
-
-const dateFormat = (dateString) => {
-  const date = new Date(dateString);
-  const day = String(date.getDate()).padStart(2, "0");
-  const month = date.toLocaleString("en-GB", { month: "long" });
-  const year = date.getFullYear();
-  return `${day} ${month} ${year}`;
-};
+import { dateFormat } from "../utils/dateFormat";
 
 export default function Profile() {
   const { username } = useParams();

@@ -2,16 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../services/api";
 import { Link } from "react-router-dom";
 import userImg from "../img/user-picture.svg";
-
-const dateFormat = (dateString) => {
-  const date = new Date(dateString);
-
-  const day = String(date.getDate()).padStart(2, "0");
-  const month = date.toLocaleString("en-GB", { month: "long" });
-  const year = date.getFullYear();
-
-  return `${day} ${month} ${year}`;
-};
+import { dateFormat } from "../utils/dateFormat";
 
 export default function Home() {
   const [articles, setArticles] = useState([]);
