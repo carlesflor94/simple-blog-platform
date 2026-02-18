@@ -76,6 +76,11 @@ h1 {
   border-radius: 8px;
 }
 
+.general-error {
+  color: red;
+  margin: 0;
+}
+
 /*root layout*/
 
 .app-header {
@@ -376,11 +381,6 @@ h1 {
 .signup-bottom-container {
   display: flex;
   justify-content: space-between;
-}
-
-.signup-error {
-  color: red;
-  margin: 0;
 }
 
 /*profile*/
