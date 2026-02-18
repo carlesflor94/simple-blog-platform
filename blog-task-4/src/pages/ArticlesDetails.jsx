@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import api from "../services/api";
 import userImg from "../img/user-picture.svg";
@@ -21,6 +21,7 @@ export default function ArticlesDetails() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   const isArticleAuthor =
     user && article && user.username === article.author.username;
@@ -38,6 +39,22 @@ export default function ArticlesDetails() {
         setLoading(false);
       });
   }, [slug]);
+
+  /*delete func */
+  const handleDelete = async () => {
+    const popUpWindowDelete = window.confirm(
+      "The article will be permanently deleted. Are you sure?",
+    );
+
+    if (!popUpWindowDelete) return;
+
+    try {
+      await api.delete(`/articles/${slug}`);
+      navigate("/");
+    } catch (err) {
+      setError("The article could not be deleted");
+    }
+  };
 
   if (loading) {
     return (
@@ -114,9 +131,14 @@ export default function ArticlesDetails() {
           </div>
           <button className="general-button">Favorite article</button>
           {isArticleAuthor && (
-            <Link to={`/editor/${article.slug}`} className="general-button">
-              Edit Article
-            </Link>
+            <>
+              <Link to={`/editor/${article.slug}`} className="general-button">
+                Edit Article
+              </Link>
+              <button onClick={handleDelete} className="general-button">
+                Delete Article
+              </button>
+            </>
           )}
         </div>
       </div>
