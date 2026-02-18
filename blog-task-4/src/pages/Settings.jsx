@@ -106,9 +106,7 @@ export default function Settings() {
 
       console.log("Payload being sent:", updatedUser);
 
-      const data = await api.put("/user", {
-        user: updatedUser,
-      });
+      const data = await api.put("/user", updatedUser);
 
       login(data.user);
       navigate(`/profile/${data.user.username}`);
