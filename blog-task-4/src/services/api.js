@@ -11,7 +11,13 @@ async function request(endpoint, options = {}) {
     ...options,
   });
 
-  const data = await response.json();
+  let data;
+
+  try {
+    data = await response.json();
+  } catch {
+    data = null;
+  }
 
   if (!response.ok) {
     throw data;
