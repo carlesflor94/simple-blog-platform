@@ -4,6 +4,7 @@ import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
 import Button from "../components/Button";
 import { useForm } from "react-hook-form";
+import FormInput from "../components/FormInput";
 
 export default function NewPost() {
   const navigate = useNavigate();
@@ -79,27 +80,31 @@ export default function NewPost() {
         onSubmit={handleSubmit(onSubmit)}
         className="newpost-form general-form"
       >
-        <input
-          type="text"
-          className="general-user-input"
+        <FormInput
+          name="title"
           placeholder="Title"
-          {...register("title", { required: "Title is required" })}
-        />
-        {errors.title && <p>{errors.title.message}</p>}
-        <input
-          type="text"
+          register={register}
+          rules={{ required: "Title is required" }}
+          errors={errors}
           className="general-user-input"
-          placeholder="Short description"
-          {...register("description", { required: "Description is required" })}
         />
-        {errors.description && <p>{errors.description.message}</p>}
-        <textarea
-          type="text"
-          className="newpost-user-input-text"
+        <FormInput
+          name="description"
+          placeholder="Description"
+          register={register}
+          rules={{ required: "Description is required" }}
+          errors={errors}
+          className="general-user-input"
+        />
+        <FormInput
+          as="textarea"
+          name="body"
           placeholder="Input your text"
-          {...register("body", { required: "Body is required" })}
+          register={register}
+          rules={{ required: "Body is required" }}
+          errors={errors}
+          className="newpost-user-input-text"
         />
-        {errors.body && <p>{errors.body.message}</p>}
 
         <div className="general-tags">
           {["one", "something", "chinese", "english", "spanish"].map((tag) => (

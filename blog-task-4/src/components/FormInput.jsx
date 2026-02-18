@@ -14,12 +14,12 @@ export default function FormInput({
     <div className="general-form">
       {label && <label>{label}</label>}
 
-      <Component>
+      <Component
         type={type}
         placeholder={placeholder}
         className={className}
         {...register(name, rules)}
-      </Component>
+      />
 
       {errors[name] && <p className="general-error">{errors[name].message}</p>}
     </div>
