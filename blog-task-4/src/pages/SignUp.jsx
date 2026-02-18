@@ -1,68 +1,24 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
 import Button from "../components/Button";
+import { useForm } from "react-hook-form";
 
 export default function SignUp() {
-  const [formSignUp, setFormSignUp] = useState({
-    username: "",
-    email: "",
-    password: "",
-    repeatPassword: "",
-    agree: false,
-  });
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setError,
+    formState: { errors },
+  } = useForm();
 
-  const [errors, setErrors] = useState(null);
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-
-    setFormSignUp({
-      ...formSignUp,
-      [name]: type === "checkbox" ? checked : value,
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    let signUpErrors = {};
-
-    if (formSignUp.username.length < 3 || formSignUp.username.length > 20) {
-      signUpErrors.username = [
-        "Username must be between 3 and 20 characters long",
-      ];
-    }
-
-    if (!formSignUp.email.includes("@")) {
-      signUpErrors.email = ["Invalid email"];
-    }
-
-    if (formSignUp.password.length < 6 || formSignUp.password.length > 40) {
-      signUpErrors.password = [
-        "Password must be between 6 and 20 characters long",
-      ];
-    }
-
-    if (!formSignUp.agree) {
-      signUpErrors.agree = ["You must agree to use your personal data"];
-    }
-
-    if (formSignUp.password !== formSignUp.repeatPassword) {
-      signUpErrors.repeatPassword = ["Passwords do not match"];
-    }
-
-    if (Object.keys(signUpErrors).length > 0) {
-      setErrors(signUpErrors);
-      return;
-    }
-
-    setErrors({});
-
+  const onSubmit = async (formSignUp) => {
     try {
-      const data = await api.post("/users", {
+      const response = await api.post("/users", {
         user: {
           username: formSignUp.username,
           email: formSignUp.email,
@@ -70,64 +26,90 @@ export default function SignUp() {
         },
       });
 
-      login(data.user);
+      login(response.user);
       navigate("/");
     } catch (err) {
-      setErrors(err.errors);
+      if (err.errors) {
+        Object.entries(err.errors).forEach(([field, messages]) => {
+          setError(field, {
+            type: "server",
+            message: messages.join(", "),
+          });
+        });
+      }
     }
   };
 
   return (
     <div className="signup-container general-container">
       <h1 className="signup-title">Sign Up</h1>
-      <form onSubmit={handleSubmit} className="signup-form general-form">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="signup-form general-form"
+      >
         <input
           type="text"
           className="general-user-input"
           placeholder="Username"
-          name="username"
-          value={formSignUp.username}
-          onChange={handleChange}
-          required
+          {...register("username", {
+            required: "Username is required",
+            minLength: {
+              value: 3,
+              message: "Username must be at least 3 characters",
+            },
+            maxLength: {
+              value: 20,
+              message: "Username must not exceed 20 characters",
+            },
+          })}
         />
-        {errors?.username && (
-          <p className="signup-error">{errors.username.join(", ")}</p>
+        {errors.username && (
+          <p className="signup-error">{errors.username.message}</p>
         )}
         <input
-          type="text"
+          type="email"
           className="general-user-input"
           placeholder="Email address"
-          name="email"
-          value={formSignUp.email}
-          onChange={handleChange}
-          required
+          {...register("email", {
+            required: "Email is required",
+            pattern: {
+              value: /^\S+@\S+$/i,
+              message: "Invalid email",
+            },
+          })}
         />
-        {errors?.email && (
-          <p className="signup-error">{errors.email.join(", ")}</p>
-        )}
+        {errors.email && <p className="signup-error">{errors.email.message}</p>}
         <input
           type="password"
           className="general-user-input"
           placeholder="Password"
-          name="password"
-          value={formSignUp.password}
-          onChange={handleChange}
-          required
+          {...register("password", {
+            required: "Password is required",
+            minLength: {
+              value: 6,
+              message: "Password must be at least 6 characters",
+            },
+            maxLength: {
+              value: 40,
+              message: "Password must not exceed 40 characters",
+            },
+          })}
         />
-        {errors?.password && (
-          <p className="signup-error">{errors.password.join(", ")}</p>
+        {errors.password && (
+          <p className="signup-error">{errors.password.message}</p>
         )}
         <input
           type="password"
           className="general-user-input"
           placeholder="Repeat Password"
-          name="repeatPassword"
-          value={formSignUp.repeatPassword}
-          onChange={handleChange}
-          required
+          {...register("repeatPassword", {
+            required: "Repeat your password",
+            validate: (value) =>
+              value === watch("password") || "Passwords do not match",
+          })}
         />
-        {errors?.repeatPassword && (
-          <p className="signup-error">{errors.repeatPassword.join(", ")}</p>
+        {errors.repeatPassword && (
+          <p className="signup-error">{errors.repeatPassword.message}</p>
         )}
 
         <div className="signup-bottom-container">
@@ -135,15 +117,15 @@ export default function SignUp() {
             <label className="signup-checkbox">
               <input
                 type="checkbox"
-                name="agree"
                 className="signup-checkbox-input"
-                checked={formSignUp.agree}
-                onChange={handleChange}
+                {...register("agree", {
+                  required: "You must agree to use your personal data",
+                })}
               />
               I give consent to use my personal data
             </label>
-            {errors?.agree && (
-              <p className="signup-error">{errors.agree.join(", ")}</p>
+            {errors.agree && (
+              <p className="signup-error">{errors.agree.message}</p>
             )}
           </div>
           <Button type="submit">Sign Up</Button>
