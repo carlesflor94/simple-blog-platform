@@ -91,27 +91,20 @@ export default function Settings() {
     setErrors({});
 
     try {
-      const updatedUser = {};
-
-      if (formUpdateUser.username !== user.username) {
-        updatedUser.username = formUpdateUser.username;
-      }
-
-      if (formUpdateUser.email !== user.email) {
-        updatedUser.email = formUpdateUser.email;
-      }
+      const updatedUser = {
+        username: formUpdateUser.username,
+        email: formUpdateUser.email,
+      };
 
       if (formUpdateUser.password) {
         updatedUser.password = formUpdateUser.password;
       }
 
-      if (formUpdateUser.avatar !== (user.image || "")) {
+      if (formUpdateUser.avatar) {
         updatedUser.image = formUpdateUser.avatar;
       }
 
-      if (Object.keys(updatedUser).length === 0) {
-        return;
-      }
+      console.log("Payload being sent:", updatedUser);
 
       const data = await api.put("/user", {
         user: updatedUser,
