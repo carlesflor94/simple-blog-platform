@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import newpostimg from "../img/newpost.svg";
 import settingsimg from "../img/settings.svg";
@@ -6,6 +6,12 @@ import profileimg from "../img/profile.svg";
 
 export default function RootLayout() {
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
 
   return (
     <div className="root-layout">
@@ -37,7 +43,7 @@ export default function RootLayout() {
                   {user.username}
                 </NavLink>
                 <button
-                  onClick={logout}
+                  onClick={handleLogout}
                   className="header-nav-item header-logout-button"
                 >
                   Log Out

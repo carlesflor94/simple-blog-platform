@@ -72,7 +72,7 @@ export default function SignIn() {
           className="general-user-input"
           placeholder="Password"
           {...register("password", {
-            required: "Email is required",
+            required: "Password is required",
             minLength: {
               value: 6,
               message: "Password must be at least 6 characters",
