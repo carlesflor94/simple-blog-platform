@@ -113,6 +113,7 @@ export default function Settings() {
           className="general-user-input"
         />
         <FormInput
+          type="password"
           name="password"
           placeholder="Password"
           register={register}
@@ -130,6 +131,7 @@ export default function Settings() {
           className="general-user-input"
         />
         <FormInput
+          type="password"
           name="repeatPassword"
           placeholder="Repeat Password"
           register={register}

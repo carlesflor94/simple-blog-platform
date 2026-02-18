@@ -3,6 +3,7 @@ import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
 import Button from "../components/Button";
 import { useForm } from "react-hook-form";
+import FormInput from "../components/FormInput";
 
 export default function SignIn() {
   const navigate = useNavigate();
@@ -54,24 +55,26 @@ export default function SignIn() {
         className="signin-form general-form"
       >
         {errors.root && <p className="signup-error">{errors.root.message}</p>}
-        <input
-          type="email"
-          className="general-user-input"
+        <FormInput
+          name="email"
           placeholder="Email"
-          {...register("email", {
+          register={register}
+          rules={{
             required: "Email is required",
             pattern: {
               value: /^\S+@\S+$/i,
               message: "Invalid email",
             },
-          })}
-        />
-        {errors.email && <p className="signup-error">{errors.email.message}</p>}
-        <input
-          type="password"
+          }}
+          errors={errors}
           className="general-user-input"
+        />
+        <FormInput
+          type="password"
+          name="password"
           placeholder="Password"
-          {...register("password", {
+          register={register}
+          rules={{
             required: "Password is required",
             minLength: {
               value: 6,
@@ -81,11 +84,10 @@ export default function SignIn() {
               value: 40,
               message: "Password must not exceed 40 characters",
             },
-          })}
+          }}
+          errors={errors}
+          className="general-user-input"
         />
-        {errors.password && (
-          <p className="signup-error">{errors.password.message}</p>
-        )}
 
         <div className="signin-bottom-container general-container">
           <p className="signin-text">
