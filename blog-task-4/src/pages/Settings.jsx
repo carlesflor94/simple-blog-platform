@@ -4,6 +4,7 @@ import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
 import Button from "../components/Button";
 import { useForm } from "react-hook-form";
+import FormInput from "../components/FormInput";
 
 export default function Settings() {
   const { user, login } = useAuth();
@@ -79,11 +80,11 @@ export default function Settings() {
         onSubmit={handleSubmit(onSubmit)}
         className="signup-form general-form"
       >
-        <input
-          type="text"
-          className="general-user-input"
+        <FormInput
+          name="username"
           placeholder="Username"
-          {...register("username", {
+          register={register}
+          rules={{
             required: "Username is required",
             minLength: {
               value: 3,
@@ -93,29 +94,29 @@ export default function Settings() {
               value: 20,
               message: "Username must not exceed 20 characters",
             },
-          })}
-        />
-        {errors.username && (
-          <p className="signup-error">{errors.username.message}</p>
-        )}
-        <input
-          type="text"
+          }}
+          errors={errors}
           className="general-user-input"
-          placeholder="Email address"
-          {...register("email", {
+        />
+        <FormInput
+          name="email"
+          placeholder="Email"
+          register={register}
+          rules={{
             required: "Email is required",
             pattern: {
               value: /^\S+@\S+$/i,
               message: "Invalid email",
             },
-          })}
-        />
-        {errors.email && <p className="signup-error">{errors.email.message}</p>}
-        <input
-          type="password"
+          }}
+          errors={errors}
           className="general-user-input"
+        />
+        <FormInput
+          name="password"
           placeholder="Password"
-          {...register("password", {
+          register={register}
+          rules={{
             minLength: {
               value: 6,
               message: "Password must be at least 6 characters",
@@ -124,27 +125,25 @@ export default function Settings() {
               value: 40,
               message: "Password must not exceed 40 characters",
             },
-          })}
-        />
-        {errors.password && (
-          <p className="signup-error">{errors.password.message}</p>
-        )}
-        <input
-          type="password"
+          }}
+          errors={errors}
           className="general-user-input"
+        />
+        <FormInput
+          name="repeatPassword"
           placeholder="Repeat Password"
-          {...register("repeatPassword", {
+          register={register}
+          rules={{
             validate: (value) => value === password || "Passwords do not match",
-          })}
-        />
-        {errors.repeatPassword && (
-          <p className="signup-error">{errors.repeatPassword.message}</p>
-        )}
-        <input
-          type="text"
+          }}
+          errors={errors}
           className="general-user-input"
+        />
+        <FormInput
+          name="avatar"
           placeholder="Avatar URL"
-          {...register("avatar", {
+          register={register}
+          rules={{
             validate: (value) =>
               !value ||
               (() => {
@@ -155,11 +154,10 @@ export default function Settings() {
                   return "User image must be a valid URL";
                 }
               })(),
-          })}
+          }}
+          errors={errors}
+          className="general-user-input"
         />
-        {errors.avatar && (
-          <p className="signup-error">{errors.avatar.message}</p>
-        )}
 
         <div className="signup-bottom-container">
           <div className="signup-checkbox-wrapper"></div>
