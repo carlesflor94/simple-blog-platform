@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
+import Button from "../components/Button";
 
 export default function Settings() {
   const [errors, setErrors] = useState(null);
@@ -180,7 +181,7 @@ export default function Settings() {
 
         <div className="signup-bottom-container">
           <div className="signup-checkbox-wrapper"></div>
-          <button className="general-button">Update Settings</button>
+          <Button type="submit">Update Settings</Button>
         </div>
       </form>
     </div>
