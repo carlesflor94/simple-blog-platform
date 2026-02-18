@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
@@ -23,6 +23,18 @@ export default function Settings() {
       return false;
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      setFormUpdateUser({
+        username: user.username,
+        email: user.email,
+        password: "",
+        repeatPassword: "",
+        avatar: user.image || "",
+      });
+    }
+  }, [user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -79,19 +91,37 @@ export default function Settings() {
     setErrors({});
 
     try {
+      const updatedUser = {};
+
+      if (formUpdateUser.username !== user.username) {
+        updatedUser.username = formUpdateUser.username;
+      }
+
+      if (formUpdateUser.email !== user.email) {
+        updatedUser.email = formUpdateUser.email;
+      }
+
+      if (formUpdateUser.password) {
+        updatedUser.password = formUpdateUser.password;
+      }
+
+      if (formUpdateUser.avatar !== (user.image || "")) {
+        updatedUser.image = formUpdateUser.avatar;
+      }
+
+      if (Object.keys(updatedUser).length === 0) {
+        return;
+      }
+
       const data = await api.put("/user", {
-        user: {
-          username: formUpdateUser.username,
-          email: formUpdateUser.email,
-          password: formUpdateUser.password || undefined,
-          image: formUpdateUser.avatar || undefined,
-        },
+        user: updatedUser,
       });
 
       login(data.user);
       navigate(`/profile/${data.user.username}`);
     } catch (err) {
-      setErrors(err.errors);
+      console.log("Update failed:", err);
+      setErrors(err?.errors || { general: ["Update failed"] });
     }
   };
 
