@@ -111,6 +111,21 @@ export default function ArticlesDetails() {
             <button key={tag}>{tag}</button>
           ))}
         </div>
+        <div className="article-user-actions">
+          {isArticleAuthor && (
+            <div className="article-user-buttons">
+              <Link to={`/editor/${article.slug}`} className="general-button">
+                Edit Article
+              </Link>
+              <button
+                onClick={handleDelete}
+                className="general-button article-delete-button"
+              >
+                Delete Article
+              </button>
+            </div>
+          )}
+        </div>
         <div className="article-author">
           <div className="article-author-img">
             <img
@@ -130,16 +145,6 @@ export default function ArticlesDetails() {
             <p className="article-date">{dateFormat(article.createdAt)}</p>
           </div>
           <button className="general-button">Favorite article</button>
-          {isArticleAuthor && (
-            <>
-              <Link to={`/editor/${article.slug}`} className="general-button">
-                Edit Article
-              </Link>
-              <button onClick={handleDelete} className="general-button">
-                Delete Article
-              </button>
-            </>
-          )}
         </div>
       </div>
     </div>

@@ -312,6 +312,19 @@ h1 {
   margin-top: 24px;
 }
 
+.article-user-actions {
+  margin-top: 15px;
+}
+
+.article-user-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.article-delete-button:hover {
+  background-color: red;
+}
+
 /*sign in*/
 
 .signin-container {
