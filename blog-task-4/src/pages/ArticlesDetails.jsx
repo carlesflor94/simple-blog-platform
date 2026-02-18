@@ -4,6 +4,8 @@ import ReactMarkdown from "react-markdown";
 import api from "../services/api";
 import userImg from "../img/user-picture.svg";
 import { useAuth } from "../context/AuthContext";
+import Button from "../components/Button";
+import LinkButton from "../components/LinkButton";
 
 const dateFormat = (dateString) => {
   const date = new Date(dateString);
@@ -114,15 +116,12 @@ export default function ArticlesDetails() {
         <div className="article-user-actions">
           {isArticleAuthor && (
             <div className="article-user-buttons">
-              <Link to={`/editor/${article.slug}`} className="general-button">
+              <LinkButton to={`/editor/${article.slug}`}>
                 Edit Article
-              </Link>
-              <button
-                onClick={handleDelete}
-                className="general-button article-delete-button"
-              >
+              </LinkButton>
+              <Button onClick={handleDelete} variant="secondary">
                 Delete Article
-              </button>
+              </Button>
             </div>
           )}
         </div>
@@ -144,7 +143,7 @@ export default function ArticlesDetails() {
             </p>
             <p className="article-date">{dateFormat(article.createdAt)}</p>
           </div>
-          <button className="general-button">Favorite article</button>
+          <Button>Favorite article</Button>
         </div>
       </div>
     </div>
