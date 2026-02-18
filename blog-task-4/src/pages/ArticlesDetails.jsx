@@ -6,16 +6,7 @@ import userImg from "../img/user-picture.svg";
 import { useAuth } from "../context/AuthContext";
 import Button from "../components/Button";
 import LinkButton from "../components/LinkButton";
-
-const dateFormat = (dateString) => {
-  const date = new Date(dateString);
-
-  const day = String(date.getDate()).padStart(2, "0");
-  const month = date.toLocaleString("en-GB", { month: "long" });
-  const year = date.getFullYear();
-
-  return `${day} ${month} ${year}`;
-};
+import { dateFormat } from "../utils/dateFormat";
 
 export default function ArticlesDetails() {
   const { slug } = useParams();
