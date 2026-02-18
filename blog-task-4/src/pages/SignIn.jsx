@@ -76,14 +76,6 @@ export default function SignIn() {
           register={register}
           rules={{
             required: "Password is required",
-            minLength: {
-              value: 6,
-              message: "Password must be at least 6 characters",
-            },
-            maxLength: {
-              value: 40,
-              message: "Password must not exceed 40 characters",
-            },
           }}
           errors={errors}
           className="general-user-input"

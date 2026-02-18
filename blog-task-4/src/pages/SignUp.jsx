@@ -3,6 +3,7 @@ import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
 import Button from "../components/Button";
 import { useForm } from "react-hook-form";
+import FormInput from "../components/FormInput";
 
 export default function SignUp() {
   const {
@@ -47,11 +48,11 @@ export default function SignUp() {
         onSubmit={handleSubmit(onSubmit)}
         className="signup-form general-form"
       >
-        <input
-          type="text"
-          className="general-user-input"
+        <FormInput
+          name="username"
           placeholder="Username"
-          {...register("username", {
+          register={register}
+          rules={{
             required: "Username is required",
             minLength: {
               value: 3,
@@ -61,29 +62,30 @@ export default function SignUp() {
               value: 20,
               message: "Username must not exceed 20 characters",
             },
-          })}
-        />
-        {errors.username && (
-          <p className="signup-error">{errors.username.message}</p>
-        )}
-        <input
-          type="email"
+          }}
+          errors={errors}
           className="general-user-input"
-          placeholder="Email address"
-          {...register("email", {
+        />
+        <FormInput
+          name="email"
+          placeholder="Email"
+          register={register}
+          rules={{
             required: "Email is required",
             pattern: {
               value: /^\S+@\S+$/i,
               message: "Invalid email",
             },
-          })}
-        />
-        {errors.email && <p className="signup-error">{errors.email.message}</p>}
-        <input
-          type="password"
+          }}
+          errors={errors}
           className="general-user-input"
+        />
+        <FormInput
+          type="password"
+          name="password"
           placeholder="Password"
-          {...register("password", {
+          register={register}
+          rules={{
             required: "Password is required",
             minLength: {
               value: 6,
@@ -93,40 +95,41 @@ export default function SignUp() {
               value: 40,
               message: "Password must not exceed 40 characters",
             },
-          })}
-        />
-        {errors.password && (
-          <p className="signup-error">{errors.password.message}</p>
-        )}
-        <input
-          type="password"
+          }}
+          errors={errors}
           className="general-user-input"
+        />
+        <FormInput
+          type="password"
+          name="repeatPassword"
           placeholder="Repeat Password"
-          {...register("repeatPassword", {
+          register={register}
+          rules={{
             required: "Repeat your password",
             validate: (value) =>
               value === watch("password") || "Passwords do not match",
-          })}
+          }}
+          errors={errors}
+          className="general-user-input"
         />
-        {errors.repeatPassword && (
-          <p className="signup-error">{errors.repeatPassword.message}</p>
-        )}
 
         <div className="signup-bottom-container">
           <div className="signup-checkbox-wrapper">
             <label className="signup-checkbox">
-              <input
-                type="checkbox"
-                className="signup-checkbox-input"
-                {...register("agree", {
-                  required: "You must agree to use your personal data",
-                })}
-              />
-              I give consent to use my personal data
+              <div className="signup-checkbox-row">
+                <FormInput
+                  type="checkbox"
+                  name="agree"
+                  register={register}
+                  rules={{
+                    required: "You must agree to use your personal data",
+                  }}
+                  errors={errors}
+                  className="signup-checkbox-input"
+                />
+                I give consent to use my personal data
+              </div>
             </label>
-            {errors.agree && (
-              <p className="signup-error">{errors.agree.message}</p>
-            )}
           </div>
           <Button type="submit">Sign Up</Button>
         </div>
