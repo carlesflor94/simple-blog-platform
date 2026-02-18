@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
+import Button from "../components/Button";
 
 export default function NewPost() {
   const navigate = useNavigate();
@@ -129,9 +130,7 @@ export default function NewPost() {
           ))}
         </div>
         <div className="newpost-publish-container">
-          <button type="submit" className="general-button">
-            Publish Article
-          </button>
+          <Button type="submit">Publish Article</Button>
         </div>
       </form>
     </div>

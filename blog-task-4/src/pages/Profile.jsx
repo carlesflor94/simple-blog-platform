@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import api from "../services/api";
 import { useParams, Link } from "react-router-dom";
 import userImg from "../img/user-picture.svg";
+import Button from "../components/Button";
 
 const dateFormat = (dateString) => {
   const date = new Date(dateString);
@@ -53,7 +54,7 @@ export default function Profile() {
           alt="user profile picture"
         />
         <h2 className="profile-title">{profileUser.username}</h2>
-        <button className="profile-follow-button general-button">Follow</button>
+        <Button>Follow</Button>
       </div>
 
       <div className="profile-feed">
