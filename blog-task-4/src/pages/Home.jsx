@@ -3,6 +3,7 @@ import api from "../services/api";
 import { Link } from "react-router-dom";
 import userImg from "../img/user-picture.svg";
 import { dateFormat } from "../utils/dateFormat";
+import Banner from "../components/Banner";
 
 export default function Home() {
   const [articles, setArticles] = useState([]);
@@ -35,10 +36,10 @@ export default function Home() {
 
   return (
     <div className="home-page">
-      <div className="home-banner general-container">
+      <Banner background="#61bb61">
         <h1 className="home-title">Realworld Blog</h1>
         <h2 className="home-subtitle">A place to share your knowledge</h2>
-      </div>
+      </Banner>
 
       <div className="home-content">
         <div className="home-tags general-container">
