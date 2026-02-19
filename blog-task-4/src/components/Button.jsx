@@ -8,7 +8,7 @@ export default function Button({
   const variants = {
     primary: "general-button",
     secondary: "general-button article-delete-button",
-    favorite: "general-button favorite-button",
+    favorite: "general-button article-favorite-button",
   };
 
   const variantClass = variants[variant] || variants.primary;

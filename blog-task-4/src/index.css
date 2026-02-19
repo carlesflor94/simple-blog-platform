@@ -330,6 +330,12 @@ h1 {
   background-color: red;
 }
 
+.article-favorite-button {
+  color: #61bb61;
+  background-color: white;
+  border: 1px solid #61bb61;
+}
+
 /*sign in*/
 
 .signin-container {
