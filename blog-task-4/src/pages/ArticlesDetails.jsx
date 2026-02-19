@@ -7,6 +7,7 @@ import { useAuth } from "../context/AuthContext";
 import Button from "../components/Button";
 import LinkButton from "../components/LinkButton";
 import { dateFormat } from "../utils/dateFormat";
+import Banner from "../components/Banner";
 
 export default function ArticlesDetails() {
   const { slug } = useParams();
@@ -91,30 +92,29 @@ export default function ArticlesDetails() {
 
   return (
     <div className="article-page">
-      <div className="article-banner">
-        <div className="article-banner-content general-container">
-          <h1 className="article-title">{article.title}</h1>
-          <div className="article-author">
-            <div className="article-author-img">
-              <img
-                src={article.author.image || userImg}
-                alt="user profile picture"
-              />
-            </div>
-            <div className="article-author-details">
-              <p className="article-author-name">
-                <Link
-                  to={`/profile/${article.author.username}`}
-                  className="article-author-link"
-                >
-                  {article.author.username}
-                </Link>
-              </p>
-              <p className="article-date">{dateFormat(article.createdAt)}</p>
-            </div>
+      <Banner align="left">
+        <h1 className="article-title">{article.title}</h1>
+        <div className="article-author">
+          <div className="article-author-img">
+            <img
+              src={article.author.image || userImg}
+              alt="user profile picture"
+            />
+          </div>
+          <div className="article-author-details">
+            <p className="article-author-name">
+              <Link
+                to={`/profile/${article.author.username}`}
+                className="article-author-link"
+              >
+                {article.author.username}
+              </Link>
+            </p>
+            <p className="article-date">{dateFormat(article.createdAt)}</p>
           </div>
         </div>
-      </div>
+      </Banner>
+
       <div className="article-content general-container">
         <div className="article-text">
           <ReactMarkdown>{article.body}</ReactMarkdown>
