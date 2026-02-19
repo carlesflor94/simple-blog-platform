@@ -49,6 +49,26 @@ export default function ArticlesDetails() {
     }
   };
 
+  /*favorite func */
+  const handleFavorite = async () => {
+    if (!user) {
+      navigate("/signin");
+      return;
+    }
+
+    try {
+      let response;
+      if (article.favorited) {
+        response = await api.delete(`/articles/${slug}/favorite`);
+      } else {
+        response = await api.post(`/articles/${slug}/favorite`);
+      }
+      setArticle(response.article);
+    } catch (err) {
+      console.log("Failed to update article", err);
+    }
+  };
+
   if (loading) {
     return (
       <div className="general-container">
@@ -134,7 +154,12 @@ export default function ArticlesDetails() {
             </p>
             <p className="article-date">{dateFormat(article.createdAt)}</p>
           </div>
-          <Button>Favorite article</Button>
+          <Button
+            onClick={handleFavorite}
+            variant={article.favorited ? "primary" : "favorite"}
+          >
+            ♥ {article.favoritesCount}
+          </Button>
         </div>
       </div>
     </div>
