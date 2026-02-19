@@ -6,6 +6,7 @@ import { useParams, Link } from "react-router-dom";
 import userImg from "../img/user-picture.svg";
 import Button from "../components/Button";
 import { dateFormat } from "../utils/dateFormat";
+import Banner from "../components/Banner";
 
 export default function Profile() {
   const { username } = useParams();
@@ -39,8 +40,8 @@ export default function Profile() {
   if (loading || !profileUser) return <p>Loading profile...</p>;
 
   return (
-    <div className="profile-page general-container">
-      <div className="profile-banner">
+    <div className="profile-page">
+      <Banner>
         <img
           src={profileUser.image || defaultAvatar}
           className="profile-picture"
@@ -48,9 +49,9 @@ export default function Profile() {
         />
         <h2 className="profile-title">{profileUser.username}</h2>
         <Button>Follow</Button>
-      </div>
+      </Banner>
 
-      <div className="profile-feed">
+      <div className="profile-feed general-container">
         <button
           className={feedTab === "feed" ? "profile-tab-active" : ""}
           onClick={() => setFeedTab("feed")}
