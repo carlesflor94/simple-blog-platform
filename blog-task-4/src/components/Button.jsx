@@ -5,10 +5,13 @@ export default function Button({
   variant = "primary",
   className = "",
 }) {
-  const variantClass =
-    variant === "secondary"
-      ? "general-button article-delete-button"
-      : "general-button";
+  const variants = {
+    primary: "general-button",
+    secondary: "general-button article-delete-button",
+    favorite: "general-button favorite-button",
+  };
+
+  const variantClass = variants[variant] || variants.primary;
 
   return (
     <button
