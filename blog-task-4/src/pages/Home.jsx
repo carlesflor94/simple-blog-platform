@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import userImg from "../img/user-picture.svg";
 import { dateFormat } from "../utils/dateFormat";
 import Banner from "../components/Banner";
@@ -8,8 +8,9 @@ import Pagination from "../components/Pagination";
 
 export default function Home() {
   const [articles, setArticles] = useState([]);
-  const [page, setPage] = useState(1);
   const [articlesCount, setArticlesCount] = useState(0);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const page = Number(searchParams.get("page")) || 1;
 
   const articlesLimit = 3;
 
@@ -110,7 +111,7 @@ export default function Home() {
         <Pagination
           currentPage={page}
           totalPages={totalPages}
-          setPage={setPage}
+          setPage={(newPage) => setSearchParams({ page: newPage })}
         />
       </div>
     </div>
