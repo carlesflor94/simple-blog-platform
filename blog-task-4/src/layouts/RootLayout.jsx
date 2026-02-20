@@ -1,4 +1,4 @@
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import newpostimg from "../img/newpost.svg";
 import settingsimg from "../img/settings.svg";
@@ -7,6 +7,10 @@ import profileimg from "../img/profile.svg";
 export default function RootLayout() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const borderHidden =
+    location.pathname === "/" || location.pathname.startsWith("/profile");
 
   const handleLogout = () => {
     logout();
@@ -16,7 +20,11 @@ export default function RootLayout() {
   return (
     <div className="root-layout">
       <header className="app-header">
-        <div className="header-wrapper general-container">
+        <div
+          className={`header-wrapper general-container ${
+            borderHidden ? "header-no-border" : ""
+          }`}
+        >
           <div className="header-title">
             <h1>Realworld Blog</h1>
           </div>

@@ -156,6 +156,10 @@ h1 {
   cursor: pointer;
 }
 
+.header-wrapper.header-no-border {
+  border-bottom: none;
+}
+
 /*home page*/
 
 .home-banner {
