@@ -10,16 +10,28 @@ export default function FormInput({
   className = "",
 }) {
   const Component = as;
+  const isCheckbox = type === "checkbox";
   return (
     <div className="general-form">
-      {label && <label>{label}</label>}
+      {!isCheckbox && label && <label>{label}</label>}
 
-      <Component
-        type={type}
-        placeholder={placeholder}
-        className={className}
-        {...register(name, rules)}
-      />
+      {isCheckbox ? (
+        <div className="signup-checkbox">
+          <input
+            type="checkbox"
+            className={className}
+            {...register(name, rules)}
+          />
+          {label && <label htmlFor={name}>{label}</label>}
+        </div>
+      ) : (
+        <Component
+          type={type}
+          placeholder={placeholder}
+          className={className}
+          {...register(name, rules)}
+        />
+      )}
 
       {errors[name] && <p className="general-error">{errors[name].message}</p>}
     </div>

@@ -113,24 +113,19 @@ export default function SignUp() {
           className="general-user-input"
         />
 
+        <FormInput
+          type="checkbox"
+          name="agree"
+          label="I give consent to use my personal data"
+          register={register}
+          rules={{
+            required: "You must agree to use your personal data",
+          }}
+          errors={errors}
+          className="signup-checkbox-input"
+        />
+
         <div className="signup-bottom-container">
-          <div className="signup-checkbox-wrapper">
-            <label className="signup-checkbox">
-              <div className="signup-checkbox-row">
-                <FormInput
-                  type="checkbox"
-                  name="agree"
-                  register={register}
-                  rules={{
-                    required: "You must agree to use your personal data",
-                  }}
-                  errors={errors}
-                  className="signup-checkbox-input"
-                />
-                I give consent to use my personal data
-              </div>
-            </label>
-          </div>
           <Button type="submit">Sign Up</Button>
         </div>
       </form>
