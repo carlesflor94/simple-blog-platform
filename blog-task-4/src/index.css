@@ -6,9 +6,12 @@
 
 body {
   margin: 0;
+  font-family: var(--font-text);
 }
 
-h1 {
+h1,
+h2,
+h3 {
   font-family: var(--font-title);
 }
 
@@ -199,6 +202,7 @@ h1 {
   border: solid 1px grey;
   padding: 16px;
   margin-bottom: 16px;
+  border-radius: 10px;
 }
 
 .home-tags p {
@@ -210,6 +214,7 @@ h1 {
   border: solid 1px grey;
   padding: 16px;
   margin-bottom: 16px;
+  border-radius: 10px;
 }
 
 .home-preview-header {
