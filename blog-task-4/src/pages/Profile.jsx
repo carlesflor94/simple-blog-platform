@@ -2,7 +2,7 @@ import { useAuth } from "../context/AuthContext";
 import defaultAvatar from "../img/default-logo.png";
 import { useEffect, useState } from "react";
 import api from "../services/api";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import userImg from "../img/user-picture.svg";
 import Button from "../components/Button";
 import { dateFormat } from "../utils/dateFormat";
@@ -14,6 +14,12 @@ export default function Profile() {
   const [feedTab, setFeedTab] = useState("feed");
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) navigate("/signin", { replace: true });
+  }, [user, navigate]);
 
   useEffect(() => {
     api
