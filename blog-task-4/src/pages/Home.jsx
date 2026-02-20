@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import userImg from "../img/user-picture.svg";
 import { dateFormat } from "../utils/dateFormat";
 import Banner from "../components/Banner";
+import Pagination from "../components/Pagination";
 
 export default function Home() {
   const [articles, setArticles] = useState([]);
@@ -24,15 +25,6 @@ export default function Home() {
   }, [page]);
 
   const totalPages = Math.ceil(articlesCount / articlesLimit);
-
-  const visiblePages = 7;
-  let startPage = Math.max(1, page - Math.floor(visiblePages / 2));
-  let endPage = startPage + visiblePages - 1;
-
-  if (endPage > totalPages) {
-    endPage = totalPages;
-    startPage = Math.max(1, endPage - visiblePages + 1);
-  }
 
   return (
     <div className="home-page">
@@ -103,22 +95,11 @@ export default function Home() {
           ))}
         </div>
 
-        <div className="home-pagination-container general-container">
-          {Array.from({ length: endPage - startPage + 1 }, (_, index) => {
-            const pageNumber = startPage + index;
-            return (
-              <button
-                key={pageNumber}
-                className={
-                  page === pageNumber ? "page-button active" : "page-button"
-                }
-                onClick={() => setPage(pageNumber)}
-              >
-                {pageNumber}
-              </button>
-            );
-          })}
-        </div>
+        <Pagination
+          currentPage={page}
+          totalPages={totalPages}
+          setPage={setPage}
+        />
       </div>
     </div>
   );
