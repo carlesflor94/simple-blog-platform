@@ -30,12 +30,19 @@ export default function SignUp() {
       login(response.user);
       navigate("/");
     } catch (err) {
-      if (err.errors) {
-        Object.entries(err.errors).forEach(([field, messages]) => {
+      const serverErrors = err?.response?.data?.errors;
+
+      if (serverErrors) {
+        Object.entries(serverErrors).forEach(([field, messages]) => {
           setError(field, {
             type: "server",
             message: messages.join(", "),
           });
+        });
+      } else {
+        setError("root", {
+          type: "server",
+          message: "Something went wrong. Please try again.",
         });
       }
     }
@@ -48,6 +55,7 @@ export default function SignUp() {
         onSubmit={handleSubmit(onSubmit)}
         className="signup-form general-form"
       >
+        {errors.root && <p className="general-error">{errors.root.message}</p>}
         <FormInput
           name="username"
           placeholder="Username"
