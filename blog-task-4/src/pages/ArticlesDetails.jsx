@@ -46,6 +46,7 @@ export default function ArticlesDetails() {
       await api.delete(`/articles/${slug}`);
       navigate("/");
     } catch (err) {
+      console.error(err);
       setError("The article could not be deleted");
     }
   };

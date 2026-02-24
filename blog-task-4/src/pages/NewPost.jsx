@@ -1,14 +1,12 @@
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../services/api";
-import { useAuth } from "../context/AuthContext";
 import Button from "../components/Button";
 import { useForm } from "react-hook-form";
 import FormInput from "../components/FormInput";
 
 export default function NewPost() {
   const navigate = useNavigate();
-  const { user } = useAuth();
   const { slug } = useParams();
   const isEditing = !!slug;
 

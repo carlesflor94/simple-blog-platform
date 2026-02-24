@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import Button from "../components/Button";
 import { useForm } from "react-hook-form";
 import FormInput from "../components/FormInput";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function SignUp() {
   const {
