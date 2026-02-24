@@ -4,6 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import Button from "../components/Button";
 import { useForm } from "react-hook-form";
 import FormInput from "../components/FormInput";
+import { useEffect, useState } from "react";
 
 export default function SignUp() {
   const {
@@ -11,13 +12,17 @@ export default function SignUp() {
     handleSubmit,
     watch,
     setError,
+    clearErrors,
     formState: { errors },
   } = useForm();
 
   const navigate = useNavigate();
   const { login } = useAuth();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onSubmit = async (formSignUp) => {
+    clearErrors("root");
+    setIsSubmitting(true);
     try {
       const response = await api.post("/users", {
         user: {
@@ -45,6 +50,8 @@ export default function SignUp() {
           message: "Something went wrong. Please try again.",
         });
       }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -70,6 +77,7 @@ export default function SignUp() {
               value: 20,
               message: "Username must not exceed 20 characters",
             },
+            onChange: () => clearErrors("username"),
           }}
           errors={errors}
           className="general-user-input"
@@ -84,6 +92,7 @@ export default function SignUp() {
               value: /^\S+@\S+$/i,
               message: "Invalid email",
             },
+            onChange: () => clearErrors("email"),
           }}
           errors={errors}
           className="general-user-input"
@@ -103,6 +112,7 @@ export default function SignUp() {
               value: 40,
               message: "Password must not exceed 40 characters",
             },
+            onChange: () => clearErrors("password"),
           }}
           errors={errors}
           className="general-user-input"
@@ -134,7 +144,9 @@ export default function SignUp() {
         />
 
         <div className="signup-bottom-container">
-          <Button type="submit">Sign Up</Button>
+          <Button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Signing up..." : "Sign Up"}
+          </Button>
         </div>
       </form>
     </div>
